@@ -6,8 +6,8 @@ app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 # Initialize Supabase client
-SUPABASE_URL = "YOUR_SUPABASE_URL"
-SUPABASE_KEY = "YOUR_SUPABASE_KEY"
+SUPABASE_URL = "https://oymqwovofxphcaxnhbpx.supabase.co"
+SUPABASE_KEY = "sb_publishable_-A_HLSE2qGpReaw9voxx1w_eQ-2WVVZ"
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 
