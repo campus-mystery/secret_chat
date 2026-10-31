@@ -64,9 +64,6 @@
             if (!val) return;
             username = val;
             document.getElementById('username-modal').style.display = 'none';
-
-            // Request history for this specific user after setting name
-            socket.emit('request_history', { username: username });
         }
 
         function handleKeyPress(e) {
