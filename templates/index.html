@@ -10,11 +10,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
     <style>
         body {
-            background-color: #efeae2;
+            background-color: #0b141a;
         }
         .whatsapp-bg {
-            background-color: #efeae2;
+            background-color: #0b141a;
             background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+            background-blend-mode: overlay;
             opacity: 0.95;
         }
     </style>
@@ -22,25 +23,25 @@
 <body class="h-screen flex flex-col justify-between overflow-hidden">
 
     <!-- Username Modal -->
-    <div id="username-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-lg p-6 w-full max-w-sm shadow-xl">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Enter Your Name</h2>
-            <input type="text" id="username-input" placeholder="Your secret name..." class="w-full px-4 py-2.5 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 mb-4 text-base">
-            <button onclick="setUsername()" class="w-full bg-emerald-600 text-white py-2.5 rounded-lg font-medium hover:bg-emerald-700 transition">Start Chatting</button>
+    <div id="username-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+        <div class="bg-[#111b21] border border-gray-800 rounded-lg p-6 w-full max-w-sm shadow-xl">
+            <h2 class="text-xl font-semibold text-white mb-4">Enter Your Name</h2>
+            <input type="text" id="username-input" placeholder="Your secret name..." class="w-full px-4 py-2.5 bg-[#202c33] text-white border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 mb-4 text-base placeholder-gray-400">
+            <button onclick="setUsername()" class="w-full bg-[#00a884] text-white py-2.5 rounded-lg font-medium hover:bg-[#01755c] transition">Start Chatting</button>
         </div>
     </div>
 
-   <!-- WhatsApp Header -->
-<header class="bg-[#00a884] text-white px-4 py-3 flex items-center shadow-md z-10">
-    <!-- Profile Picture Container -->
-    <div class="w-10 h-10 rounded-full overflow-hidden mr-3 flex-shrink-0 bg-gray-300">
-        <img src="https://github.com/campus-mystery/secret_chat/blob/main/templates/222bbbbc-8837-4b43-916f-621d614c1ad3.png?raw=true" alt="Ridha" class="w-full h-full object-cover">
-    </div>
-    <div>
-        <h1 class="font-semibold text-lg leading-tight">Ridha</h1>
-        <p id="status-text" class="text-xs text-emerald-100">Online</p>
-    </div>
-</header>
+    <!-- WhatsApp Header -->
+    <header class="bg-[#202c33] text-white px-4 py-3 flex items-center shadow-md z-10 border-b border-gray-800">
+        <!-- Profile Picture Container -->
+        <div class="w-10 h-10 rounded-full overflow-hidden mr-3 flex-shrink-0 bg-gray-700">
+            <img src="https://github.com/campus-mystery/secret_chat/blob/main/templates/222bbbbc-8837-4b43-916f-621d614c1ad3.png?raw=true" alt="Ridha" class="w-full h-full object-cover">
+        </div>
+        <div>
+            <h1 class="font-semibold text-lg leading-tight text-white">Ridha</h1>
+            <p id="status-text" class="text-xs text-gray-400">Online</p>
+        </div>
+    </header>
 
     <!-- Chat Messages Area -->
     <main id="chat-container" class="whatsapp-bg flex-1 overflow-y-auto p-4 space-y-3 flex flex-col">
@@ -48,8 +49,8 @@
     </main>
 
     <!-- WhatsApp Footer / Input -->
-    <footer class="bg-[#f0f2f5] px-4 py-3 flex items-center gap-3 z-10">
-        <input type="text" id="message-input" placeholder="Type a message" onkeypress="handleKeyPress(event)" class="flex-1 bg-white px-4 py-2.5 rounded-lg border-none focus:outline-none text-base shadow-sm">
+    <footer class="bg-[#202c33] px-4 py-3 flex items-center gap-3 z-10 border-t border-gray-800">
+        <input type="text" id="message-input" placeholder="Type a message" onkeypress="handleKeyPress(event)" class="flex-1 bg-[#2a3942] text-white px-4 py-2.5 rounded-lg border-none focus:outline-none text-base shadow-sm placeholder-gray-400">
         <button onclick="sendMessage()" class="bg-[#00a884] text-white p-2.5 rounded-full hover:bg-[#01755c] transition flex items-center justify-center">
             <svg viewBox="0 0 24 24" width="20" height="20" class="fill-current"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
         </button>
@@ -104,12 +105,12 @@
             const isMe = msg.username === username;
 
             const div = document.createElement('div');
-            div.className = `flex flex-col max-w-[75%] md:max-w-[50%] p-2.5 rounded-lg shadow-sm text-sm relative ${isMe ? 'self-end bg-[#dcf8c6]' : 'self-start bg-white'}`;
+            div.className = `flex flex-col max-w-[75%] md:max-w-[50%] p-2.5 rounded-lg shadow-sm text-sm relative ${isMe ? 'self-end bg-[#005c4b] text-white' : 'self-start bg-[#202c33] text-white'}`;
             
             div.innerHTML = `
-                ${!isMe ? `<span class="text-xs font-bold text-emerald-700 mb-1">${msg.username}</span>` : ''}
-                <span class="text-gray-800 break-words pr-12">${msg.message}</span>
-                <span class="text-[10px] text-gray-500 self-end mt-1 select-none">${msg.time}</span>
+                ${!isMe ? `<span class="text-xs font-bold text-emerald-400 mb-1">${msg.username}</span>` : ''}
+                <span class="text-white break-words pr-12">${msg.message}</span>
+                <span class="text-[10px] text-gray-300 self-end mt-1 select-none">${msg.time}</span>
             `;
 
             container.appendChild(div);
